@@ -162,4 +162,13 @@ function circleIntersectsRect(circlePos, radius, rectPos, rectWidth, rectHeight)
   else if (circlePos.y > rectPos.y + rectHeight) testY = rectPos.y + rectHeight; 
   
   let distX = circlePos.x - testX;
-  let distY = circlePos.y -​⬤
+  let distY = circlePos.y - testY;
+  let distance = sqrt((distX * distX) + (distY * distY));
+
+  return (distance <= radius);
+}
+
+function generateRandomVelocity(speed) {
+  let angle = random(TWO_PI); // Genera un ángulo aleatorio
+  return createVector(cos(angle) * speed, sin(angle) * speed);
+}
