@@ -156,26 +156,4 @@ function checkCollisionWithBarriers() {
       return barrier;
     }
   }
-  return null;
-}
-
-function circleIntersectsRect(circlePos, radius, rectPos, rectWidth, rectHeight) {
-  let testX = circlePos.x;
-  let testY = circlePos.y;
-
-  if (circlePos.x < rectPos.x) testX = rectPos.x;      
-  else if (circlePos.x > rectPos.x + rectWidth) testX = rectPos.x + rectWidth;   
-  if (circlePos.y < rectPos.y) testY = rectPos.y;      
-  else if (circlePos.y > rectPos.y + rectHeight) testY = rectPos.y + rectHeight; 
-  
-  let distX = circlePos.x - testX;
-  let distY = circlePos.y - testY;
-  let distance = sqrt((distX * distX) + (distY * distY));
-
-  return (distance <= radius);
-}
-
-function generateRandomVelocity(speed) {
-  let angle = random(TWO_PI); // Genera un ángulo aleatorio
-  return createVector(cos(angle) * speed, sin(angle) * speed);
-}
+  return​⬤
