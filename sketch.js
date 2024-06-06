@@ -11,7 +11,7 @@ let barrierRadius = 20; // Radio de los círculos de barrera
 let speed = 1.5; // Ajusta este valor para cambiar la velocidad de la selección
 
 function preload() {
-  img = loadImage('face.jpg'); // Asegúrate de tener una imagen llamada "face.jpg" en la carpeta de datos
+  img = loadImage('./face.jpg'); // Asegúrate de que "face.jpg" esté en la misma carpeta que "index.html" y "sketch.js"
 }
 
 function setup() {
@@ -151,4 +151,31 @@ function extractShape() {
 }
 
 function checkCollisionWithBarriers() {
-​⬤
+  for (let barrier of barriers) {
+    if (circleIntersectsRect(barrier, barrierRadius, offset, extracted.width, extracted.height)) {
+      return barrier;
+    }
+  }
+  return null;
+}
+
+function circleIntersectsRect(circlePos, radius, rectPos, rectWidth, rectHeight) {
+  let testX = circlePos.x;
+  let testY = circlePos.y;
+
+  if (circlePos.x < rectPos.x) testX = rectPos.x;      
+  else if (circlePos.x > rectPos.x + rectWidth) testX = rectPos.x + rectWidth;   
+  if (circlePos.y < rectPos.y) testY = rectPos.y;      
+  else if (circlePos.y > rectPos.y + rectHeight) testY = rectPos.y + rectHeight; 
+  
+  let distX = circlePos.x - testX;
+  let distY = circlePos.y - testY;
+  let distance = sqrt((distX * distX) + (distY * distY));
+
+  return (distance <= radius);
+}
+
+function generateRandomVelocity(speed) {
+  let angle = random(TWO_PI); // Genera un ángulo aleatorio
+  return createVector(cos(angle) * speed, sin(angle) * speed);
+}
