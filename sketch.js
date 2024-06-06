@@ -151,9 +151,4 @@ function extractShape() {
 }
 
 function checkCollisionWithBarriers() {
-  for (let barrier of barriers) {
-    if (circleIntersectsRect(barrier, barrierRadius, offset, extracted.width, extracted.height)) {
-      return barrier;
-    }
-  }
-  return​⬤
+​⬤
