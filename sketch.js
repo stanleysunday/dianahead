@@ -20,8 +20,9 @@ function setup() {
   offset = createVector(width / 2, height / 2); // Inicializa en el centro
   velocity = generateRandomVelocity(speed); // Velocidad inicial
 
-  // Configurar el botón de cerrar
-  let closeButton = select('#closeButton');
+  // Crear el botón "C"
+  let closeButton = createButton('C');
+  closeButton.position(windowWidth - 60, 10);
   closeButton.mousePressed(closeShape);
 }
 
