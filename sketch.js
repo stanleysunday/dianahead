@@ -15,10 +15,19 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(360, 640);
-  img.resize(360, 640); // Redimensiona la imagen para que coincida con el tamaño del lienzo
+  createCanvas(windowWidth, windowHeight);
+  img.resize(windowWidth, windowHeight); // Redimensiona la imagen para que coincida con el tamaño del lienzo
   offset = createVector(width / 2, height / 2); // Inicializa en el centro
   velocity = generateRandomVelocity(speed); // Velocidad inicial
+
+  // Configurar el botón de cerrar
+  let closeButton = select('#closeButton');
+  closeButton.mousePressed(closeShape);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  img.resize(windowWidth, windowHeight);
 }
 
 function draw() {
@@ -85,26 +94,25 @@ function draw() {
 }
 
 // Registra los puntos del ratón para las barreras
-function mousePressed() {
+function touchStarted() {
   if (isClosed && isExtracted) {
     barriers.push(createVector(mouseX, mouseY));
   } else if (!isClosed) {
     path.push(createVector(mouseX, mouseY));
   }
+  return false; // Previene el comportamiento por defecto del navegador
 }
 
-// Cierra la forma cuando se presiona una tecla
-function keyPressed() {
-  if (key === 'c' || key === 'C') {
-    if (path.length > 2) {
-      let first = path[0];
-      let last = path[path.length - 1];
-      if (dist(first.x, first.y, last.x, last.y) < 10) {
-        isClosed = true;
-        console.log("Shape closed");
-        if (!isExtracted) {
-          extractShape();
-        }
+// Cierra la forma cuando se presiona el botón
+function closeShape() {
+  if (path.length > 2) {
+    let first = path[0];
+    let last = path[path.length - 1];
+    if (dist(first.x, first.y, last.x, last.y) < 10) {
+      isClosed = true;
+      console.log("Shape closed");
+      if (!isExtracted) {
+        extractShape();
       }
     }
   }
@@ -154,13 +162,4 @@ function circleIntersectsRect(circlePos, radius, rectPos, rectWidth, rectHeight)
   else if (circlePos.y > rectPos.y + rectHeight) testY = rectPos.y + rectHeight; 
   
   let distX = circlePos.x - testX;
-  let distY = circlePos.y - testY;
-  let distance = sqrt((distX * distX) + (distY * distY));
-
-  return (distance <= radius);
-}
-
-function generateRandomVelocity(speed) {
-  let angle = random(TWO_PI); // Genera un ángulo aleatorio
-  return createVector(cos(angle) * speed, sin(angle) * speed);
-}
+  let distY = circlePos.y -​⬤
