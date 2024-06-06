@@ -98,7 +98,13 @@ function draw() {
 function touchStarted() {
   if (isClosed && isExtracted) {
     barriers.push(createVector(mouseX, mouseY));
-  } else if (!isClosed) {
+  }
+  return false; // Previene el comportamiento por defecto del navegador
+}
+
+// Dibuja la línea mientras se mueve el dedo
+function touchMoved() {
+  if (!isClosed) {
     path.push(createVector(mouseX, mouseY));
   }
   return false; // Previene el comportamiento por defecto del navegador
