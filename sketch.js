@@ -1,4 +1,4 @@
-llet img;
+let img;
 let path = [];
 let barriers = [];
 let inactiveBarriers = []; // Barreras que ya no colisionan
