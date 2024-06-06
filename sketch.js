@@ -22,7 +22,7 @@ function setup() {
 
   // Crear el botón "C"
   let closeButton = createButton('C');
-  closeButton.position(windowWidth - 60, 10);
+  closeButton.position(10, 10); // Posicionar el botón a la izquierda
   closeButton.mousePressed(closeShape);
 }
 
