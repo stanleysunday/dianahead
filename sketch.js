@@ -16,7 +16,11 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  img.resize(windowWidth, windowHeight); // Redimensiona la imagen para que coincida con el tamaño del lienzo
+  // Resize con aspect ratio (fit-cover): escalar al mínimo que cubra el canvas
+  let scaleW = windowWidth / img.width;
+  let scaleH = windowHeight / img.height;
+  let s = max(scaleW, scaleH);
+  img.resize(floor(img.width * s), floor(img.height * s));
   offset = createVector(width / 2, height / 2); // Inicializa en el centro
   velocity = generateRandomVelocity(speed); // Velocidad inicial
 
@@ -28,12 +32,16 @@ function setup() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
-  img.resize(windowWidth, windowHeight);
+  // Recargar la página para re-escalar la imagen correctamente
+  location.reload();
 }
 
 function draw() {
   background(255);
-  image(img, 0, 0);
+  // Centrar imagen (fit-cover)
+  let imgX = (width - img.width) / 2;
+  let imgY = (height - img.height) / 2;
+  image(img, imgX, imgY);
 
   // Dibuja la línea blanca para la selección
   stroke(255);
